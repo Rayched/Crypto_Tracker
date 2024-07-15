@@ -1,7 +1,13 @@
+import styled from "styled-components";
+
+const Title = styled.h2`
+    color: ${(props) => props.theme.accentColor};
+`;
+
 function Coins(){
     return (
         <div>
-            <h2>Coins</h2>
+            <Title>코인 목록</Title>
         </div>
     );
 }
