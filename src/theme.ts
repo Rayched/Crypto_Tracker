@@ -4,5 +4,6 @@ export const theme: DefaultTheme = {
     //Color Code is get flatuicolors
     bgColor: "#2c3e50", //Midnightblue
     textColor: "#ecf0f1", //clouds
-    accentColor: "#f1c40f" //sun flower
+    accentColor: "#f1c40f", //sun flower
+    accentBgColor: "#f1f2f6" //Anti - flash white
 };

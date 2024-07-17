@@ -11,7 +11,6 @@ function Coin(){
 
     return (
         <div>
-            <h4>코인인님 한판해요</h4>
             <h4>coinID : {coinID}</h4>
         </div>
     );

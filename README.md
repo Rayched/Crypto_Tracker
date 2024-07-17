@@ -35,3 +35,11 @@ Crypto Tracker, Routing Setting
 - 브라우저가 기본적으로 제공하는 CSS Style을 초기화하였음.
 - 이후 외부 폰트를 설치, 배경색, 글자색을 수정하였다.
 ```
+
+### 2024.07.17 : Main Home style 작업 (coins)
+- Main Home 화면 설계 시작
+- 작업 편의를 위해 임의의 코인 3개의 정보를 받아옴
+- 가져온 코인 목록을 아래 이미지와 같이 메인 화면에 출력
+- 마우스를 갖다대면 하이라이트가 들어오게끔 hover 설정
+
+<img src="refImgs/SampleImg_20240717.png">
