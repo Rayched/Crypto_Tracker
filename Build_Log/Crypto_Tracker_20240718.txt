@@ -1,0 +1,80 @@
+2024.07.18 작업 Log
+
+#5.3 ~ 5.4(극 초반)
+ - Coin paprika api 사용해서
+ - Coin Data 가져오기 (fetch)
+
+ - TypeScript 사용하고 있기 때문에
+   Coin data 가져오기 전에 type setting
+
+ - Coin Paprika API 통해서 Data를 가져올 것인데
+   Component가 처음 Rendering될 때 한 번만 데이터를 가져올 것이다.
+ - async, 비동기 함수를 통해 data를 fetch할 것인데
+   외부에 별도의 함수를 만들고, 이를 실행하는 형태가 아니라
+   '즉시실행함수'를 활용해서 useEffect의 내부에서 한번에 처리하는 형태로
+   코드를 작성 
+   (데이터 가져오는 것은 비동기식으로 처리해야 error 발생하지 않음)
+ - Coin Paprika API 통해서 Coin Data를 가져오고
+   이를 홈화면에 출력하는 것까지 구현 + 로딩 메시지 추가
+ 
+ - Coin Data 이미지 추가
+ => `https://cryptocurrencyliveprices.com/img/${coin.id}.png`
+ - 이미지를 가져오는데는 성공했지만, 기본 크기가 너무 커서 문제
+ - 당연히 styled-component로 upgrade시킨다.
+ - CoinImgs 생성, <img> 대체하였음.
+ - 다만 이미지와 코인 이름이 수평이 아니라서 좀 보기 불편하다...
+ - <Coin> style 설정 부분으로 올라가서
+   <Coin>의 하위 요소로 들어간 a 태그에 flexbox 설정
+   내부 요소를 중앙 정렬하였음. (align-items)
+
+ * 지금까지 작업한 코드 Github Upload (17:52)
+
+# 5.4 (Coin Detail page 작업)
+ - 이전 과정에서 Coin Data fetch, 출력, 
+   코인 아이콘 추가까지 진행하였다.
+ - 코인을 클릭하면 상세정보, coin detail 페이지로 넘어가는데
+   상세 페이지에는 coinID만 출력된 상태이다.
+ - 다만 불편한 점이 남아있는데....
+ - 첫번째는 코인 상세보기 페이지로 넘어갔다가, 홈화면으로 돌아오면
+   데이터를 처음부터 다시 받아온다는 점이다..
+   처음 랜더링될 때 받아온게 가급적이면 그대로 유지가 됐으면 좋겠다...
+ - 이 부분을 구현하기 전에, 먼저 Coin Detail, 코인 클릭 시
+   상세 정보 페이지부터 만들어놓자...
+ 
+ - Coin Detail Page로 넘어갈 때, 서버로부터 Coin Data를 받아오기 전에
+  먼저 가져온, 홈화면에 띄운 일부 데이터를 로딩 화면으로 띄워보기
+ - <Link> Component Update
+ => 강의에서는<Link to={...}/> 식으로 to에 모든 것을 적었지만
+      현재 사용중인 react-router의 버전이 6 버전이므로
+      <Link to={url} state={coin.name}/>으로 작성하였음.
+    (버전이 업그레이드되면서, state가 to에서 분리됐다고 한다...)
+
+ - useLocation() 사용해서 Coins에서 받아온 coin data를 가져옴
+ - 이때 가져오는 데이터의 key 값을 잘 확인해야한다.
+   코인 이름이 'state'로 바뀌고, id가 pathname으로 바뀌었기 때문에
+   강의 및 댓글에서 나온 예제 그대로 복붙하면 error가 난다.
+ - 가져온 데이터 객체의 key 값 확인하고, ref
+   (Title에 코인 이름 외에 이미지도 추가하였음)
+
+ - Crypto Tracker의 state는 처음 Rendering될 때 생성된다.
+   즉, 처음 접속할 때 무조건 홈화면으로만 접속해야만 한다는 것이고
+   /coinID 페이지로 처음 접속하면 error가 발생한다.
+ 
+ - Coin Paprika api로 coin data를 가져오지 못했을 때
+   이미지를 출력하지 않도록 코드 수정 (Loading만 출력)
+
+* 지금까지 작업한 코드 Github Upload ()
+
+### 5.5 ()
+ - Coin Detail 페이지까지 작업 완료
+   (상세 정보를 추가한 것은 아님)
+ - 코인 이미지와 코인 이름을 화면 상단, Title로 추가함
+ - 그리고 홈화면을 거치지 않고, Detail로 접속하면
+   'Loading...'이라는 메시지가 Title로 나오도록 설정
+ 
+ - 문제점
+  1). Detail로 넘어갔다가, 홈화면으로 돌아오면
+      데이터를 다시 받아오는 문제...
+
+
+
