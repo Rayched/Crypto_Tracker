@@ -65,16 +65,41 @@
 
 * 지금까지 작업한 코드 Github Upload ()
 
-### 5.5 ()
+### 5.5 ~ 5.6 (Detail Page 작업)
  - Coin Detail 페이지까지 작업 완료
    (상세 정보를 추가한 것은 아님)
  - 코인 이미지와 코인 이름을 화면 상단, Title로 추가함
  - 그리고 홈화면을 거치지 않고, Detail로 접속하면
    'Loading...'이라는 메시지가 Title로 나오도록 설정
+
+ - Detail 페이지의 title과, 가져온 data가 없을 때
+   Loading을 띄우도록 코드를 작성했으니
+   이제 데이터를 가져와보자.
  
- - 문제점
-  1). Detail로 넘어갔다가, 홈화면으로 돌아오면
-      데이터를 다시 받아오는 문제...
+ - API URL
+ => https://api.coinpaprika.com/v1/coins/btc-bitcoin
+     (https://api.coinpaprika.com/v1/coins/:coinID)
+ => https://api.coinpaprika.com/v1/tickers/btc-bitcoin
+     (https://api.coinpaprika.com/v1/tickers/:coinID)
+
+ - 이번에도 데이터를 fetch하는데
+   fetch한 데이터를 response에 저장하고, json() 실행하는 것을
+   한번에 처리하는 형태로 코드를 작성하였다. (한줄로 통합)
+   ('await( await fetch()).json();')
+ - 위의 방법을 사용해서 coin detail data와 price data를 받아왔다.
+ - 그리고 가져온 데이터를 state에 각각 저장하고
+   Loading 관련 logic을 수정하였다. (데이터 받아오면 loading 창 X)
+
+ - api를 통해 가져온 데이터들을 state에 각각 저장했고
+   이제 이를 웹페이지에 출력해야 하는데
+   typescript를 사용하고 있기 때문에 일일히 수동으로 타입을 알려줘야
+   앞으로 발생할 Error를 방지할 수 있다.
+ - 노가다를 해서 InfoData, PriceData의 interface 생성
+   
+   
+
+
+
 
 
 
