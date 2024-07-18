@@ -50,8 +50,16 @@ function Coin(){
         <Container>
             <Header>
                 <Title>
-                    <CoinImgs src={`https://cryptocurrencyliveprices.com/img/${Location.pathname}.png`}/>
-                    {Location.state}
+                    {
+                        (Location.state === null)
+                        ? "Loading..."
+                        : (
+                            <>
+                                <CoinImgs src={`https://cryptocurrencyliveprices.com/img/${Location.pathname}.png`}/>
+                                {Location.state}
+                            </>
+                        )
+                    }
                 </Title>
             </Header>
             {
