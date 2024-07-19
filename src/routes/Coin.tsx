@@ -11,15 +11,16 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
+//Header's
 const Header = styled.header`
     height: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${(props) => props.theme.accentColor};
 `;
 
 const Title = styled.h2`
-    color: ${(props) => props.theme.accentColor};
     font-size: 30px;
     display: flex;
     align-items: center;
@@ -30,8 +31,48 @@ const CoinImgs = styled.img`
     margin-right: 7px;
 `;
 
-//Type Setting
+const MainWrapper = styled.div``;
 
+const Wrappers = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 35px 0px;
+`;
+
+//Coin_Info's
+const Coin_Infos = styled(Wrappers)`
+    th, td {
+        text-align: center;
+        padding: 3px;
+        font-size: 18px;
+        border: 2px solid white;
+    }
+`;
+
+//Coin Price
+const Coin_Price = styled(Wrappers)`
+    th, td {
+        text-align: center;
+        padding: 3px;
+        font-size: 18px;
+        border: 2px solid white;
+    }
+`;
+
+//Coin Desc
+const Coin_Desc = styled(Wrappers)`
+    flex-direction: column;
+
+    div {
+        padding: 3px;
+        margin: 5px 0px;
+        border: 2px solid white;
+    }
+`;
+
+//Type Setting
 interface RouteState {
     state: {name: string};
 };
@@ -129,7 +170,7 @@ function Coin(){
             console.log(InfoData);
             console.log(PriceData);
         })();
-    }, []);
+    }, [coinID]);
 
     return (
         <Container>
@@ -148,7 +189,46 @@ function Coin(){
                 </Title>
             </Header>
             {
-                Loading ? <div>로딩 중...</div> : null
+                Loading ? "Loading..."
+                : (
+                    <MainWrapper>
+                <Coin_Infos>
+                    <table>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Rank</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td>{Info?.symbol}</td>
+                            <td>{Info?.rank}</td>
+                            <td>{"$ " + Price?.quotes.USD.price.toFixed(2)}</td>
+                        </tr>
+                    </table>
+                </Coin_Infos>
+                <Coin_Price>
+                    <table>
+                        <tr>
+                            <th>24h</th>
+                            <th>24h</th>
+                            <th>24h</th>
+                            <th>24h</th>
+                        </tr>
+                        <tr>
+                            <td>{Price?.quotes.USD.market_cap_change_24h + "%"}</td>
+                            <td>{Price?.quotes.USD.percent_change_7d + "%"}</td>
+                            <td>{Price?.quotes.USD.percent_change_30d + "%"}</td>
+                            <td>{Price?.quotes.USD.percent_change_1y + "%"}</td>
+                        </tr>
+                    </table>
+                </Coin_Price>
+                <Coin_Desc>
+                    <div>{Info?.description}</div>
+                    <div>{Info?.first_data_at}</div>
+                    <div>{Info?.last_data_at}</div>
+                </Coin_Desc>
+            </MainWrapper>
+                )
             }
         </Container>
     );

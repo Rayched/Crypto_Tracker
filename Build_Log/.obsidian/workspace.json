@@ -1,0 +1,154 @@
+{
+  "main": {
+    "id": "c5e48ed87bd04c2b",
+    "type": "split",
+    "children": [
+      {
+        "id": "f1d334c563ac071a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2ab38bc3c0f0cb05",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Crypto-Tracker_20240719.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "55cbfc2d7229eddd",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d944f2a1bc9cc6e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a46b45c0c14f26b4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "fcaae52dbc1176f8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1e2856426932e600",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "fca9db89d1e65d9f",
+    "type": "split",
+    "children": [
+      {
+        "id": "c1e4d7b1dc0276c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e95a93f0061f70a4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Crypto-Tracker_20240719.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b49ebf6594a8a10b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Crypto-Tracker_20240719.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d28e31ef4ca219fa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "292beb804ff649bd",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Crypto-Tracker_20240719.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false
+    }
+  },
+  "active": "2ab38bc3c0f0cb05",
+  "lastOpenFiles": [
+    "Crypto-Tracker_20240719.md"
+  ]
+}

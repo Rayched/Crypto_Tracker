@@ -43,3 +43,44 @@ Crypto Tracker, Routing Setting
 - 마우스를 갖다대면 하이라이트가 들어오게끔 hover 설정
 
 <img src="refImgs/SampleImg_20240717.png">
+
+---
+
+### 2024.07.18 : coins(Main Home), coin(Detail) 작업
+
+- `Coinpaprika` API 활용해서 Coin Data를 가져옴
+- 가져온 데이터들을 `state`에 저장하고, 이를 홈 화면에 출력함.
+- API 통해서 가져온 Coin Item들에 icon 추가하였음.
+
+<img src="refImgs/MainHome_Sample.png"/>
+
+- 대략적인 Main Home 작업이 끝났으니, Coin Detail Page 작업 시작
+- `coins.tsx`에서 작업한 일부 `styled-components` 가져옴
+- `coins.tsx`에서 Coin Data에서 `coin.name`을 `state`로 전달 <br/>
+    (`<Link to={...} state={coin.name}/>`)
+- `coin.tsx`, Detail Page에서 `useLocation()` 함수를 통해 받아옴
+- 받아온 코인 이름과 URL로 전달된 coinID 활용해서 <br/>
+    Detail Page의 `<Title>` 추가함
+- Home 화면에서 클릭한 Coin Item과 동일한 icon, 이름을 Title로 표시
+
+<img src="refImgs/Details.png"/>
+
+- 이제 Detail Page에 Coin 상세 정보와 가격을 표시해야한다.
+- `coinpaprika api`통해서 `info data`, `price data`를 받아옴
+
+``` js
+const Infodata = `https://api.coinpaprika.com/v1/coins/${coinID}`;
+const Pricedata = `https://api.coinpaprika.com/v1/tickers/${coinID}`;
+```
+
+- API 통해서 받아온 `Infodata`와 `Price data`를 `state`에 각각 저장
+- Error를 사전에 방지하기 위해서 `interface` 생성 <br/> 
+   각 data들의 타입 명시하였음.
+
+---
+
+### 2024.07.19 : coin(Detail Page) 작업
+
+
+
+
