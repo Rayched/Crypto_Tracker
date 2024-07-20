@@ -1,7 +1,7 @@
 //Coin Detail Page
 
 import { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
@@ -75,6 +75,31 @@ const Coin_Desc = styled(Wrappers)`
         padding: 3px;
         margin: 5px 0px;
         border: 2px solid white;
+    }
+`;
+
+//Tabs (Nested routes)
+const Tabs = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0px;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 3px;
+`;
+
+const Tab = styled.div`
+    text-align: center;
+    font-size: 18px;
+    margin: 3px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    &:hover {
+        background-color: rgba(100, 100, 100, 0.5);
+    }
+    a {
+        display: block;
     }
 `;
 
@@ -237,6 +262,10 @@ function Coin(){
                     <div>{CoinInfo?.first_data_at}</div>
                     <div>{CoinInfo?.last_data_at}</div>
                 </Coin_Desc>
+                <Tabs>
+                    <Tab><Link to={`/${coinID}/chart`}>Chart</Link></Tab>
+                    <Tab><Link to={`/${coinID}/price`}>Price</Link></Tab>
+                </Tabs>
                 <Routes>
                     <Route path="chart" element={<Chart />}/>
                     <Route path="price" element={<Price />}/>

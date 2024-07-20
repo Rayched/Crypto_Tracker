@@ -54,3 +54,20 @@ function Coin(){
 
 ---
 
+#### `price`, `chart` 전환하는 탭 추가하기
+
+- 이제 `coin Detail` page에서 `price`, `chart` 전환하는 버튼을 추가해보자.
+- `Tabs`, `Tab`이라는 `styled-components` 만들고, `CSS` 설정하고 <br/>
+	`react-router`의 `<Link>` 통해서 URL 전환을 구현하였다.
+
+- 이 글을 쓰고 있는 시점이 `2024-07-21 00:06`인데... <br/>
+	`coinpaprika api` 서버 문제 때문인지 모르겠지만 <br/>
+	전환 `Tab` 개발에 다소 지장이 생겼다.
+
+- 내일 아침에 일어나서 보면, 될 것 같기는 한데
+- 밤이 깊은 시간에 문제가 해결되는 것을 기다리기에는 리스크가 좀 크다.
+- 원래 계획대로면 오늘 `Nested routes`까지 끝내려고 했지만 <br/>
+	아쉽게도 그거는 자고 일어난 뒤로 미뤄야 할 것 같다.
+
+- `github upload...`
+
