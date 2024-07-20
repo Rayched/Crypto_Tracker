@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Crypto-Tracker_20240719.md",
+                "file": "Crypto-Tracker_20240720.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Crypto-Tracker_20240719.md",
+                "file": "Crypto-Tracker_20240720.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Crypto-Tracker_20240719.md",
+                "file": "Crypto-Tracker_20240720.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Crypto-Tracker_20240719.md"
+                "file": "Crypto-Tracker_20240720.md"
               }
             }
           }
@@ -149,6 +149,11 @@
   },
   "active": "2ab38bc3c0f0cb05",
   "lastOpenFiles": [
-    "Crypto-Tracker_20240719.md"
+    "ref/nested_sample.png",
+    "ref/nested1.png",
+    "ref",
+    "새 폴더",
+    "nested1.png",
+    "Crypto-Tracker_20240720.md"
   ]
 }

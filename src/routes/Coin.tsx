@@ -1,8 +1,10 @@
 //Coin Detail Page
 
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Chart from "./Chart";
+import Price from "./Price";
 
 //CSS setting
 const Container = styled.div`
@@ -39,6 +41,10 @@ const Wrappers = styled.div`
     align-items: center;
 
     padding: 35px 0px;
+
+    th {
+        font-weight: bold;
+    }
 `;
 
 //Coin_Info's
@@ -152,8 +158,8 @@ function Coin(){
     const Location = useLocation();
 
     //Coin Data (Detail, Price)
-    const [Info, setInfo] = useState<I_InfoData>();
-    const [Price, setPrice] = useState<I_PriceData>();
+    const [CoinInfo, setInfo] = useState<I_InfoData>();
+    const [CoinPrice, setPrice] = useState<I_PriceData>();
 
     useEffect(() => {
         (async () => {
@@ -172,20 +178,24 @@ function Coin(){
         })();
     }, [coinID]);
 
+    console.log(Location);
+
     return (
         <Container>
             <Header>
                 <Title>
-                    {
-                        (Location.state === null)
-                        ? "Loading..."
-                        : (
-                            <>
-                                <CoinImgs src={`https://cryptocurrencyliveprices.com/img/${Location.pathname}.png`}/>
-                                {Location.state}
-                            </>
-                        )
-                    }
+                    <>
+                        {
+                            Loading ? null
+                            : (
+                                <CoinImgs src={`https://cryptocurrencyliveprices.com/img/${CoinInfo?.id? CoinInfo.id : Location?.pathname}.png`}/>
+                            )
+                        }
+                        {
+                            Location?.state? Location.state
+                            : Loading ? "Loading..." : CoinInfo?.name
+                        }
+                    </>
                 </Title>
             </Header>
             {
@@ -200,9 +210,9 @@ function Coin(){
                             <th>Price</th>
                         </tr>
                         <tr>
-                            <td>{Info?.symbol}</td>
-                            <td>{Info?.rank}</td>
-                            <td>{"$ " + Price?.quotes.USD.price.toFixed(2)}</td>
+                            <td>{CoinInfo?.symbol}</td>
+                            <td>{CoinInfo?.rank}</td>
+                            <td>{"$ " + CoinPrice?.quotes.USD.price.toFixed(2)}</td>
                         </tr>
                     </table>
                 </Coin_Infos>
@@ -215,18 +225,22 @@ function Coin(){
                             <th>24h</th>
                         </tr>
                         <tr>
-                            <td>{Price?.quotes.USD.market_cap_change_24h + "%"}</td>
-                            <td>{Price?.quotes.USD.percent_change_7d + "%"}</td>
-                            <td>{Price?.quotes.USD.percent_change_30d + "%"}</td>
-                            <td>{Price?.quotes.USD.percent_change_1y + "%"}</td>
+                            <td>{CoinPrice?.quotes.USD.market_cap_change_24h + "%"}</td>
+                            <td>{CoinPrice?.quotes.USD.percent_change_7d + "%"}</td>
+                            <td>{CoinPrice?.quotes.USD.percent_change_30d + "%"}</td>
+                            <td>{CoinPrice?.quotes.USD.percent_change_1y + "%"}</td>
                         </tr>
                     </table>
                 </Coin_Price>
                 <Coin_Desc>
-                    <div>{Info?.description}</div>
-                    <div>{Info?.first_data_at}</div>
-                    <div>{Info?.last_data_at}</div>
+                    <div>{CoinInfo?.description}</div>
+                    <div>{CoinInfo?.first_data_at}</div>
+                    <div>{CoinInfo?.last_data_at}</div>
                 </Coin_Desc>
+                <Routes>
+                    <Route path="chart" element={<Chart />}/>
+                    <Route path="price" element={<Price />}/>
+                </Routes>
             </MainWrapper>
                 )
             }
