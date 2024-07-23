@@ -1,7 +1,7 @@
 //Coin Detail Page
 
 import { useEffect, useState } from "react";
-import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useMatch, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
@@ -88,13 +88,16 @@ const Tabs = styled.div`
     padding: 3px;
 `;
 
-const Tab = styled.div`
+const Tab = styled.div<{isActive: boolean}>`
+    width: 100px;
     text-align: center;
     font-size: 18px;
     margin: 3px;
-    padding: 5px;
+    padding: 7px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+
+    color: ${(props) => props.isActive ? props.theme.accentColor : props.theme.textColor};
     &:hover {
         background-color: rgba(100, 100, 100, 0.5);
     }
@@ -186,6 +189,9 @@ function Coin(){
     const [CoinInfo, setInfo] = useState<I_InfoData>();
     const [CoinPrice, setPrice] = useState<I_PriceData>();
 
+    const PriceMatch = useMatch("/:coinID/price");
+    const ChartMatch = useMatch("/:coinID/chart");
+
     useEffect(() => {
         (async () => {
             const InfoData = await (
@@ -197,13 +203,8 @@ function Coin(){
             setInfo(InfoData);
             setPrice(PriceData);
             setLoading(false);
-
-            console.log(InfoData);
-            console.log(PriceData);
         })();
     }, [coinID]);
-
-    console.log(Location);
 
     return (
         <Container>
@@ -263,8 +264,12 @@ function Coin(){
                     <div>{CoinInfo?.last_data_at}</div>
                 </Coin_Desc>
                 <Tabs>
-                    <Tab><Link to={`/${coinID}/chart`}>Chart</Link></Tab>
-                    <Tab><Link to={`/${coinID}/price`}>Price</Link></Tab>
+                    <Tab isActive={ChartMatch !== null}>
+                        <Link to={`/${coinID}/chart`}>Chart</Link>
+                    </Tab>
+                    <Tab isActive={PriceMatch !== null}>
+                        <Link to={`/${coinID}/price`}>Price</Link>
+                    </Tab>
                 </Tabs>
                 <Routes>
                     <Route path="chart" element={<Chart />}/>
