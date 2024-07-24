@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2cb4c72b13ae817f",
+            "id": "1eae0e0774939acc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Crypto-Tracker_20240722.md",
+                "file": "Crypto-Tracker_20240724.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Crypto-Tracker_20240722.md",
+                "file": "Crypto-Tracker_20240724.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Crypto-Tracker_20240722.md",
+                "file": "Crypto-Tracker_20240724.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Crypto-Tracker_20240722.md"
+                "file": "Crypto-Tracker_20240724.md"
               }
             }
           }
@@ -147,14 +147,15 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "2cb4c72b13ae817f",
+  "active": "1eae0e0774939acc",
   "lastOpenFiles": [
+    "Crypto-Tracker_20240722.md",
+    "Crypto-Tracker_20240724.md",
     "ref/nested_exam.png",
     "ref/useMatch_exam.png",
     "ref/nested_sample.png",
     "ref/nested1.png",
     "ref/nested_switch.png",
-    "Crypto-Tracker_20240722.md",
     "Crypto-Tracker_20240720.md",
     "ref",
     "새 폴더",

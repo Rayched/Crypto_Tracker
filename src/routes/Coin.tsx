@@ -182,17 +182,17 @@ function Coin(){
     */
 
     //Loading 관련
-    const [Loading, setLoading] = useState(true);
+    const [Loading, setLoading] = useState(true); //v
     const Location = useLocation();
 
-    //Coin Data (Detail, Price)
+    //Coin Data (Detail, Price) v
     const [CoinInfo, setInfo] = useState<I_InfoData>();
     const [CoinPrice, setPrice] = useState<I_PriceData>();
 
     const PriceMatch = useMatch("/:coinID/price");
     const ChartMatch = useMatch("/:coinID/chart");
 
-    useEffect(() => {
+    useEffect(() => { //v
         (async () => {
             const InfoData = await (
                 await fetch(`https://api.coinpaprika.com/v1/coins/${coinID}`)   
