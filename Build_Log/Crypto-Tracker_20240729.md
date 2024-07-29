@@ -53,7 +53,6 @@ function App(){
 	앞에서 선언한 `QueryClient` 값을 `<QueryClientProvider>`의 `client`에 전달한다.
 
 ---
-
 ### \#\ 5.9 React Query
 
 - 기존에는 Open API 통해서 Coin Data를 수동으로 가져오고 <br/>
@@ -64,5 +63,49 @@ function App(){
 - 본격적으로 사용하기 전에 데이터를 가져오는 `fetcher` 함수를 만들어보자. <br/>
 	(`API`와 관련된 코드들을 Component에서 분리하기 )
 
+- `api.ts` 파일을 생성하고, `coin data` 가져오던 `api` 관련 코드를 이관하였다.<br/>
+	(`FetchCoins` 함수에 `Logic` 이동) 
 
+``` ts
+//api.ts
+export async function FetchCoins(){
+	return fetch("https://api.coinpaprika.com/v1/coins").then(
+		(resp) => resp.json();
+	);
+}
+```
+
+- `api` 통해서 `coin data` 가져오는 `Logic`을 별도의 함수로 이관했으니 <br/>
+	이제 `coins.tsx`에서 이를 `import`해서 `coin data` 가져올 것이다.
+
+``` tsx
+function Coins(){
+	//New
+	const {isLoading, data} = useQuery<I_Coin[]>("AllCoin", FetchCoins);
+	
+	return (
+		<div>...</div>
+	);
+}
+```
+
+- 기존의 `coins`, `Loading` 변수를 참조하던 코드 모두 `isLoading`, `data` 수정하였다.
+
+---
+
+### `useQuery()` 관련 issue
+
+```
+1. 변수 data의 이름을 'CoinData'로 변경하기
+2. 메인 홈 로딩 속도 느려지는 이슈 해결하기
+```
+
+
+#### 1. 변수 `data`의 이름을 `CoinData` 변경하기
+
+---
+
+#### 2. 메인 홈 로딩 속도 느려지는 이슈 해결하기
+
+---
 
