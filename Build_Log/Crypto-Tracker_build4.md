@@ -53,7 +53,7 @@ function App(){
 	앞에서 선언한 `QueryClient` 값을 `<QueryClientProvider>`의 `client`에 전달한다.
 
 ---
-### \#\ 5.9 React Query
+### \#\ 5.9 React Query (2024.07.29)
 
 - 기존에는 Open API 통해서 Coin Data를 수동으로 가져오고 <br/>
 	가져온 데이터를 화면에 띄우기 전까지 나오는 로딩 메시지까지 <br/>
@@ -141,4 +141,32 @@ function Coins(){
 #### 2. 메인 홈 로딩 속도 느려지는 이슈 해결하기
 
 ---
+
+### \#\ 5.10 React Query (2024.07.30)
+
+- 홈 화면에 있는 코인 중 하나를 클릭하면 <br/>
+	아래와 같이 `Coin Detail` 페이지로 넘어가는 것을 알고 있을 것이다.
+
+<img src="ref/nested_switch.png"/>
+
+- `Coin Detail` 페이지에서 `coin` component가 랜더링되기 전까지 <br/>
+	아래 이미지처럼 `Loading...`이라는 메시지가 웹 페이지 화면에 나온다.
+
+<img src="ref/before_coin-render.png"/>
+
+- 이는 `Coin Detail`로 들어갈 때마다 매번 API 접근해서 <br/>
+	`Coin Data` 받아온다는 것을 의미한다.
+
+- `react-query` 적용한 `coins.tsx`, 홈 화면은 `Coin Detail` 페이지로 넘어갔다 <br/>
+	홈 화면으로 복귀해도 로딩이 발생하지 않는다.
+
+- 이는 내부에서 자체적으로 data를 `fetch`하는 `coin` component와 <br/>
+	`react-query` 통해서 `fetch`하는 것이 다르기 때문이다.
+
+- `react query`는 `API` 통해서 가져온 `coin data`, `response`를 캐싱하고 <br/>
+	`coin detail` 페이지로 넘어갔다가 돌아와도 데이터를 다시 받지 않고 <br/>
+	앞에서 `cache`한 데이터로 접근해서 `coin data` 가져온다.
+
+- 즉, 처음말고는 추가적인 `Loading` 화면을 보지 않는다는 것이다.
+
 

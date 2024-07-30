@@ -107,6 +107,7 @@ function Coins(){
      * 느려졌던 문제를 해결할 수 있었다.
      */
 
+    console.log(isLoading, CoinData);
     return (
         <Container>
             <Header>
