@@ -214,7 +214,7 @@ function Coin(){
                         {
                             Loading ? null
                             : (
-                                <CoinImgs src={`https://cryptocurrencyliveprices.com/img/${CoinInfo?.id? CoinInfo.id : Location?.pathname}.png`}/>
+                                <CoinImgs src={`https://static.coinpaprika.com/coin/${CoinInfo?.id? CoinInfo.id : Location?.pathname}/logo.png`}/>
                             )
                         }
                         {
