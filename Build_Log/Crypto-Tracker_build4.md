@@ -201,4 +201,8 @@ import {ReactQueryDevtools} from "react-query/devtools";
 
 #### `useQuery()`
 
+``` ts
+const {isLoading, data, error} = useQuery("Key", queryFunction, options);
+```
 
+- 

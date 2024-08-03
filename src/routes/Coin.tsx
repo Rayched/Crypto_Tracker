@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
 import { useQuery } from "react-query";
-import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { fetchCoinInfo, FetchCoins, fetchCoinTickers } from "../api";
 
 //CSS setting
 const Container = styled.div`
