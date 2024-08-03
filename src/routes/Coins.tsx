@@ -61,39 +61,9 @@ interface I_Coin {
 
 function Coins(){
     const {isLoading, data: CoinData} = useQuery<I_Coin[]>(
-        "AllCoin", FetchCoins, {select: (datas) => datas.slice(0, 50)}
+        "AllCoins", FetchCoins, {select: (datas) => datas.slice(0, 50)}
     );
-    /**
-     * isLoading, data는 useQuery가 기본적으로 제공하는 변수라고 한다.
-     * 변수 data의 이름을 CoinData로 바꾸고 싶어서
-     * 아래와 같이 변경을 시도했더니 Error가 발생했다.
-     * {isLoading, data} => {isLoading, CoinData}: Error
-     * 
-     * useQuery가 기본적으로 제공하는 변수 중에서
-     * CoinData라는 이름의 변수가 없기 때문에 Error가 발생한 것이다.
-     * 
-     * 하지만 'data'라는 기본 변수를 그대로 사용하고 싶지는 않아서
-     * 이름을 바꾸는 방법을 찾아봤는데
-     * ES6 alias 이용해서 data라는 변수를 다른 이름으로 바꿀 수 있다고 한다
-     * 아래와 같이 작성하니 Error가 발생하지 않는다.
-     * {isLoading, data: CoinData}
-     * 
-     * 추가적으로 api 통해서 가져오는 coin data의 양이 많아서 그런지
-     * 예전보다 로딩 속도가 더 늘어났고, 반응도 느려졌다.
-     * 그대로 두면 많이 불편할 것 같아서
-     * 개선할 방법을 찾아봤다. (강의 댓글창)
-     * useQuery()의 세번째 매개변수로 option 설정할 수 있다고 한다.
-     * 
-     * 'select' queryFuntion이 반환하는 데이터 일부를 
-     * 변환하고자 할 때 사용할 수 있는 option이라고 한다.
-     * slice() 함수를 사용해서 queryFunction의 return 값인
-     * coinData 중 0 ~ 50번까지만 취하였다.
-     * 
-     * 이를 통해서 메인 홈의 로딩 속도가 
-     * 느려졌던 문제를 해결할 수 있었다.
-     */
 
-    console.log(isLoading, CoinData);
     return (
         <Container>
             <Header>

@@ -140,33 +140,65 @@ function Coins(){
 ---
 #### 2. 메인 홈 로딩 속도 느려지는 이슈 해결하기
 
+- 기존에 `useEffect` Hook 활용해서 `coin data`를 `fetch`해오던 부분<br/>
+	`api` 관련 코드를 `FetchCoins` 함수에 이관하고, `data fetch`하는 것을 <br/>
+    `React Query`의 `useQuery()` Hook으로 변경하니 새로운 문제가 발생하였다.
+
+- `React Query`로 업데이트하는 과정에서 `Coin Data`를 `slice`하지 않아서 <br/>
+	로딩 속도가 매우 늘어나고, 반응도 느려지는 문제가 발생하였다.
+
+- 이는 의도한 바가 아니기 때문에 개선할 방법을 찾아봤고 <br/>
+	`useQuery`의 세 번째 매개변수인 `option`의 설정, `select` 통해서 해결 가능하다고 한다.
+
+#### `select`
+
+- `queryFunction`이 반환하는 데이터 일부를 변환하고자 할 때
+- 사용할 수 잇는 `option` 속성이다.
+- 아래와 같이 `slice()` 함수를 사용해서 `queryFunction`의 `return` 값인 <br/>
+	수많은 `Coin Data`들 중에서 `0 ~ 50` 사이의 `data`만 취하였다.
+
+``` tsx
+function Coins(){
+	const [isLoading, data: CoinData] = useQuery<I_Coin[]>(
+		"AllCoin", FetchCoins, {select: (d) => d.slice(0, 50)}
+	);
+}
+```
+
+- 처음 `coin data` 받아올 때, 가져오는 개수에 제한을 두지 않으면 <br/>
+	대량의 수많은 `coin data`를 가져오고, 이는 웹 사이트의 로딩 속도에도 악영향을 준다.
+
+---
+### 번외. `React Query Devtools` (2024.07.31)
+
+- `React Query`의 모든 내부 작동을 시각화해서 보여주는 도구
+
+``` tsx
+//in App.tsx
+import {ReactQueryDevtools} from "react-query/devtools";
+
+<ReactQueryDevtools initiallsOpen={false}/>
+```
+
+- 위와 같이 `ReactQueryDevtools`를 `App.tsx`에서  import하면 <br/>
+	아래 이미지와 같이 `React Query`의 내부 동작을 확인할 수 있다.
+
+<img src="ref/ReactQueryDevtools.png"/>
+
+---
+### \#\ 5.10 React Query (2024.08.03)
+
+- `coins.tsx`에서 한 것과 동일하게 `coin.tsx`에도 똑같이 업데이트를 진행하였다.
+
+- `useQuery` 통해서 가져온 `coin data`가 `cache` 저장된 상태이면 <br/>
+	다른 페이지로 넘어갔다가 다시 복귀해도 로딩 하는데 시간이 걸리지 않는다.
+
+- 매번 `api` 서버로부터 데이터를 새로 받아오는 것이 아닌 <br/>
+	`cache`에 저장된 `data` 띄우기 때문에 이미 들어갔던 페이지는 금방 랜더링된다.
+
+
 ---
 
-### \#\ 5.10 React Query (2024.07.30)
-
-- 홈 화면에 있는 코인 중 하나를 클릭하면 <br/>
-	아래와 같이 `Coin Detail` 페이지로 넘어가는 것을 알고 있을 것이다.
-
-<img src="ref/nested_switch.png"/>
-
-- `Coin Detail` 페이지에서 `coin` component가 랜더링되기 전까지 <br/>
-	아래 이미지처럼 `Loading...`이라는 메시지가 웹 페이지 화면에 나온다.
-
-<img src="ref/before_coin-render.png"/>
-
-- 이는 `Coin Detail`로 들어갈 때마다 매번 API 접근해서 <br/>
-	`Coin Data` 받아온다는 것을 의미한다.
-
-- `react-query` 적용한 `coins.tsx`, 홈 화면은 `Coin Detail` 페이지로 넘어갔다 <br/>
-	홈 화면으로 복귀해도 로딩이 발생하지 않는다.
-
-- 이는 내부에서 자체적으로 data를 `fetch`하는 `coin` component와 <br/>
-	`react-query` 통해서 `fetch`하는 것이 다르기 때문이다.
-
-- `react query`는 `API` 통해서 가져온 `coin data`, `response`를 캐싱하고 <br/>
-	`coin detail` 페이지로 넘어갔다가 돌아와도 데이터를 다시 받지 않고 <br/>
-	앞에서 `cache`한 데이터로 접근해서 `coin data` 가져온다.
-
-- 즉, 처음말고는 추가적인 `Loading` 화면을 보지 않는다는 것이다.
+#### `useQuery()`
 
 

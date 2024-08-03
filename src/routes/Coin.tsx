@@ -5,6 +5,8 @@ import { Link, Route, Routes, useLocation, useMatch, useParams } from "react-rou
 import styled from "styled-components";
 import Chart from "./Chart";
 import Price from "./Price";
+import { useQuery } from "react-query";
+import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
 //CSS setting
 const Container = styled.div`
@@ -173,38 +175,21 @@ interface I_PriceData {
 
 function Coin(){
     const {coinID} = useParams();
-    /*
-        * 강의에서는 coinID의 type을 별도로 지정해야 했지만
-        * react-router-dom v6 사용중이면 이럴 필요가 없다.
-        * useParams()의 return 값이 string | undefined라는 것이
-        * 이미 명시가 된 상태이기 때문이다.
-        * url로 입력된 coinID를 parameter로 가져옴
-    */
-
-    //Loading 관련
-    const [Loading, setLoading] = useState(true); //v
-    const Location = useLocation();
-
-    //Coin Data (Detail, Price) v
-    const [CoinInfo, setInfo] = useState<I_InfoData>();
-    const [CoinPrice, setPrice] = useState<I_PriceData>();
 
     const PriceMatch = useMatch("/:coinID/price");
     const ChartMatch = useMatch("/:coinID/chart");
 
-    useEffect(() => { //v
-        (async () => {
-            const InfoData = await (
-                await fetch(`https://api.coinpaprika.com/v1/coins/${coinID}`)   
-            ).json();
-            const PriceData = await(
-                await fetch(`https://api.coinpaprika.com/v1/tickers/${coinID}`)
-            ).json();
-            setInfo(InfoData);
-            setPrice(PriceData);
-            setLoading(false);
-        })();
-    }, [coinID]);
+    const {isLoading: InfoLoading, data: CoinInfo} = useQuery<I_InfoData>(
+        ["CoinInfo", coinID], () => fetchCoinInfo(coinID)
+    );
+
+    const {isLoading: TickersLoading, data: CoinTickers} = useQuery<I_PriceData>(
+        ["CoinTickers", coinID], () => fetchCoinTickers(coinID)
+    );
+
+    const TotalLoading = InfoLoading || TickersLoading;
+    //Loading이 두개인데, 각 로딩 별로 코드를 수정할 수 없으니
+    //이 둘의 상태를 통합하는 로딩 변수인 TotalLoading 만듦
 
     return (
         <Container>
@@ -212,20 +197,19 @@ function Coin(){
                 <Title>
                     <>
                         {
-                            Loading ? null
+                            TotalLoading ? null
                             : (
-                                <CoinImgs src={`https://static.coinpaprika.com/coin/${CoinInfo?.id? CoinInfo.id : Location?.pathname}/logo.png`}/>
+                                <CoinImgs src={`https://static.coinpaprika.com/coin/${CoinInfo?.id}/logo.png`}/>
                             )
                         }
                         {
-                            Location?.state? Location.state
-                            : Loading ? "Loading..." : CoinInfo?.name
+                            TotalLoading ? "코인 이름..." : CoinInfo?.name
                         }
                     </>
                 </Title>
             </Header>
             {
-                Loading ? "Loading..."
+                TotalLoading ? "코인 정보를 가져오고 있습니다..."
                 : (
                     <MainWrapper>
                 <Coin_Infos>
@@ -238,7 +222,7 @@ function Coin(){
                         <tr>
                             <td>{CoinInfo?.symbol}</td>
                             <td>{CoinInfo?.rank}</td>
-                            <td>{"$ " + CoinPrice?.quotes.USD.price.toFixed(2)}</td>
+                            <td>{"$ " + CoinTickers?.quotes.USD.price.toFixed(2)}</td>
                         </tr>
                     </table>
                 </Coin_Infos>
@@ -246,15 +230,15 @@ function Coin(){
                     <table>
                         <tr>
                             <th>24h</th>
-                            <th>24h</th>
-                            <th>24h</th>
-                            <th>24h</th>
+                            <th>1 weeks</th>
+                            <th>1 Month</th>
+                            <th>1 Year</th>
                         </tr>
                         <tr>
-                            <td>{CoinPrice?.quotes.USD.market_cap_change_24h + "%"}</td>
-                            <td>{CoinPrice?.quotes.USD.percent_change_7d + "%"}</td>
-                            <td>{CoinPrice?.quotes.USD.percent_change_30d + "%"}</td>
-                            <td>{CoinPrice?.quotes.USD.percent_change_1y + "%"}</td>
+                            <td>{CoinTickers?.quotes.USD.market_cap_change_24h + "%"}</td>
+                            <td>{CoinTickers?.quotes.USD.percent_change_7d + "%"}</td>
+                            <td>{CoinTickers?.quotes.USD.percent_change_30d + "%"}</td>
+                            <td>{CoinTickers?.quotes.USD.percent_change_1y + "%"}</td>
                         </tr>
                     </table>
                 </Coin_Price>
